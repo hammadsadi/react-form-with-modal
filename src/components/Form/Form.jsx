@@ -5,8 +5,12 @@ const Form = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [modal, setModal] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
   const handleSubmitForm = (e) => {
     e.preventDefault();
+    if (!isChecked) {
+      return alert("Sorry You Cannot Agree Our Terms");
+    }
     console.log({ name, email, password });
     setModal(true);
   };
@@ -45,6 +49,13 @@ const Form = () => {
               required
             />
           </div>
+          <input
+            type="checkbox"
+            name=""
+            id=""
+            onChange={(e) => setIsChecked(e.target.checked)}
+          />{" "}
+          Are You Agree With Our Terms & Condition?
           <div className="text-right">
             <button
               className="py-2 px-6 rounded-md bg-stone-900 mt-2"
@@ -59,6 +70,8 @@ const Form = () => {
         <div className="bg-stone-800 w-full h-screen fixed top-0 flex justify-center items-center text-white">
           <div className="h-1/2 w-1/3 bg-slate-800 p-3 text-center rounded-lg">
             <h2>Your Form Submited Successfully</h2>
+
+            <button onClick={() => setModal(false)}>X</button>
           </div>
         </div>
       )}
